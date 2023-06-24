@@ -5,6 +5,7 @@ public class TopDownPlayerController : MonoBehaviour
 {
     [SerializeField] float speed = 5f;
     [SerializeField] float runMultiplier = 1.5f;
+    [SerializeField] float SlimeDetectionRadius = 5f;
 
     Rigidbody2D rb;
     Collider2D col;
@@ -14,8 +15,6 @@ public class TopDownPlayerController : MonoBehaviour
     bool isGod = false;
     bool isSprinting = false;
 
-
-    Vector3 startPosition;
     Vector3 newPosition;
 
     private void Awake()
@@ -29,13 +28,17 @@ public class TopDownPlayerController : MonoBehaviour
 
     private void Start()
     {
-        startPosition = gameObject.transform.position;
+        if (SharedState.PlayerEscaped)
+        {
+            transform.position = SharedState.PlayerPosition;
+        }
     }
 
     private void Update()
     {
         GetInput();
         SetAnimations();
+        CheckForNearbySlimes();
     }
 
     private void GetInput()
@@ -43,11 +46,11 @@ public class TopDownPlayerController : MonoBehaviour
         if (Input.GetButtonDown("Debug Previous"))
         {
             isGod = !isGod;
-            col.enabled = !isGod;            
+            col.enabled = !isGod;
         }
 
         isSprinting = Input.GetButton("Fire3");
-      
+
         moveVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
         if (isGod) moveVector *= 5f;
         if (isSprinting) moveVector *= runMultiplier;
@@ -55,7 +58,7 @@ public class TopDownPlayerController : MonoBehaviour
     }
 
     private void SetAnimations()
-    { 
+    {
         // If the player is moving
         if (moveVector != Vector2.zero)
         {
@@ -68,6 +71,20 @@ public class TopDownPlayerController : MonoBehaviour
         }
         else
             anim.SetBool("IsMoving", false);
+    }
+
+    private void CheckForNearbySlimes()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, SlimeDetectionRadius);
+
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.gameObject.tag == "Slime" && Input.GetButtonDown("Interact"))
+            {
+                SharedState.PlayerPosition = transform.position;
+                collider.gameObject.GetComponent<Slime>().LoadScene();
+            }
+        }
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -129,19 +146,5 @@ public class TopDownPlayerController : MonoBehaviour
             newPosition = new Vector3(101.23f, -41.019f, 0f);
             gameObject.transform.position = newPosition;
         }
-
-        // triggers for slimes
-        if(col.gameObject.tag == "Slime Cell" & Input.GetButtonDown("Fire1"))
-        {
-            // insert code to save the player position and place code at the start to load coordinates when switching back to dungeon scene
-            SceneManager.LoadScene("Opponent 1");
-        }
-
-        if (col.gameObject.tag == "Slime Hallway" & Input.GetButtonDown("Fire1"))
-        {
-            // insert code to save the player position and place code at the start to load coordinates when switching back to dungeon scene
-            SceneManager.LoadScene("Opponent 2");
-        }
-
     }
 }

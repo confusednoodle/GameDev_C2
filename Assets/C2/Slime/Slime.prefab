@@ -10,10 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 7294263593059850403}
   - component: {fileID: 3077134369939645907}
-  - component: {fileID: -328707152447083376}
+  - component: {fileID: -4820048266191073778}
+  - component: {fileID: 4150820987855061024}
   m_Layer: 0
   m_Name: Slime
-  m_TagString: Untagged
+  m_TagString: Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3077134369939645907
 SpriteRenderer:
@@ -85,7 +86,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-328707152447083376
+--- !u!114 &-4820048266191073778
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,8 +98,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71f565d7b39ef4c499aa508510800d36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleSprites:
-  - {fileID: -342202346, guid: d28c024f453cbde47af34b21814cbf6f, type: 3}
-  - {fileID: 747543405, guid: d28c024f453cbde47af34b21814cbf6f, type: 3}
-  - {fileID: 584388153, guid: d28c024f453cbde47af34b21814cbf6f, type: 3}
-  timeBetweenFrames: 0.17
+  idleSprites: []
+  timeBetweenFrames: 0.1
+  SceneToLoad: 
+--- !u!70 &4150820987855061024
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7933517468775064964}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.25}
+  m_Size: {x: 0.75, y: 0.5}
+  m_Direction: 0

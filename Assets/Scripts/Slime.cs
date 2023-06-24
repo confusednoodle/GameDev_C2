@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Slime : MonoBehaviour
 {
     [SerializeField] Sprite[] idleSprites;
     [SerializeField] float timeBetweenFrames = 0.1f;
+    [Space]
+    [SerializeField] string SceneToLoad;
 
     SpriteRenderer sr;
     float animationTimer = 0f;
@@ -23,8 +26,13 @@ public class Slime : MonoBehaviour
                 sr.sprite = idleSprites[++animationIndex % idleSprites.Length];
                 animationTimer = 0f;
             }
-          
+
             animationTimer += Time.deltaTime;
         }
+    }
+
+    public void LoadScene()
+    {
+        SceneManager.LoadScene(SceneToLoad);
     }
 }
