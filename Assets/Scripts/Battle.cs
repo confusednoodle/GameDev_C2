@@ -30,6 +30,8 @@ public class Battle : MonoBehaviour
     [SerializeField] Button defendButton;
     [SerializeField] Button runButton;
 
+    [SerializeField] Animator animator;
+
 
 
     public void Attack()
@@ -54,6 +56,7 @@ public class Battle : MonoBehaviour
             hitSound.Play();
             int damage = Random.Range(5, 11);
             battleText.text = "YOU LAND A LIGHT HIT! THE ENEMY TAKES " + damage.ToString() + " DAMAGE";
+            animator.Play("hit");
             enemyHP -= damage;
             StartCoroutine(WaitForEnemy());
         }
@@ -63,6 +66,7 @@ public class Battle : MonoBehaviour
             hitSound.Play();
             int damage = Random.Range(20, 31);
             battleText.text = "YOU LAND A MODERATE HIT! THE ENEMY TAKES " + damage.ToString() + " DAMAGE";
+            animator.Play("hit");
             enemyHP -= damage;
             StartCoroutine(WaitForEnemy());
         }
@@ -72,6 +76,7 @@ public class Battle : MonoBehaviour
             hitSound.Play();
             int damage = Random.Range(40, 51);
             battleText.text = "A CRITICAL HIT! THE ENEMY TAKES " + damage.ToString() + " DAMAGE";
+            animator.Play("hit");
             enemyHP -= damage;
             StartCoroutine(WaitForEnemy());
         }
