@@ -5,6 +5,7 @@ public class TopDownPlayerController : MonoBehaviour
 {
     [SerializeField] float speed = 5f;
     [SerializeField] float runMultiplier = 1.5f;
+    [SerializeField] float SlimeDetectionRadius = 5f;
 
     Rigidbody2D rb;
     Collider2D col;
@@ -37,6 +38,7 @@ public class TopDownPlayerController : MonoBehaviour
     {
         GetInput();
         SetAnimations();
+        CheckForNearbySlimes();
     }
 
     private void GetInput()
@@ -69,6 +71,20 @@ public class TopDownPlayerController : MonoBehaviour
         }
         else
             anim.SetBool("IsMoving", false);
+    }
+
+    private void CheckForNearbySlimes()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, SlimeDetectionRadius);
+
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.gameObject.tag == "Slime" && Input.GetButtonDown("Interact"))
+            {
+                SharedState.PlayerPosition = transform.position;
+                collider.gameObject.GetComponent<Slime>().LoadScene();
+            }
+        }
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -130,19 +146,5 @@ public class TopDownPlayerController : MonoBehaviour
             newPosition = new Vector3(101.23f, -41.019f, 0f);
             gameObject.transform.position = newPosition;
         }
-
-        // triggers for slimes
-        if (col.gameObject.tag == "Slime Cell" & Input.GetButtonDown("Fire1"))
-        {
-            SharedState.PlayerPosition = transform.position;
-            SceneManager.LoadScene("Opponent 1");
-        }
-
-        if (col.gameObject.tag == "Slime Hallway" & Input.GetButtonDown("Fire1"))
-        {
-            SharedState.PlayerPosition = transform.position;
-            SceneManager.LoadScene("Opponent 2");
-        }
-
     }
 }

@@ -203,6 +203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   runMultiplier: 1.5
+  SlimeDetectionRadius: 1
 --- !u!1 &7814672314141494021
 GameObject:
   m_ObjectHideFlags: 0
