@@ -30,12 +30,22 @@ public class Battle : MonoBehaviour
     [SerializeField] Button defendButton;
     [SerializeField] Button runButton;
 
-    [SerializeField] Animator animator;
+    Animator animator;
 
-
+    enum AnimationState
+    {
+        Idle,
+        Attack,
+        Hit,
+        Special
+    }
 
     public void Attack()
     {
+        Debug.Log(animator);
+        animator.SetInteger("State", (int)AnimationState.Hit);
+        StartCoroutine(ResetAnimationState());
+
         defend = false;
 
         attackButton.interactable = false;
@@ -144,7 +154,6 @@ public class Battle : MonoBehaviour
 
     void EnemyAttack()
     {
-
         int random = Random.Range(1, 4);
         if (enemyHP < 50 & random == 2 & charged == false) // Heal
         {
@@ -178,6 +187,8 @@ public class Battle : MonoBehaviour
 
             else if (number > 10 & number < 41 & charged == false) //light attack
             {
+                animator.SetInteger("State", (int)AnimationState.Attack);
+                StartCoroutine(ResetAnimationState());
                 Debug.Log("light attack");
                 hitSound.Play();
                 int damage = Random.Range(5, 11);
@@ -206,6 +217,8 @@ public class Battle : MonoBehaviour
 
             else if (number > 40 & number < 81 & charged == false) //moderate attack
             {
+                animator.SetInteger("State", (int)AnimationState.Attack);
+                StartCoroutine(ResetAnimationState());
                 Debug.Log("moderate attack");
                 hitSound.Play();
                 int damage = Random.Range(15, 31);
@@ -246,6 +259,8 @@ public class Battle : MonoBehaviour
 
             else if (charged = true & number < 80) //critical attack
             {
+                animator.SetInteger("State", (int)AnimationState.Special);
+                StartCoroutine(ResetAnimationState());
                 Debug.Log("critical attack");
                 specialSound.Play();
                 int damage = Random.Range(30, 41);
@@ -316,8 +331,15 @@ public class Battle : MonoBehaviour
         transform.GetChild(1).gameObject.SetActive(true);
     }
 
+    private IEnumerator ResetAnimationState()
+    {
+        yield return new WaitForSeconds(2.5f);
+        animator.SetInteger("State", (int)AnimationState.Idle);
+    }
+
     public void Start()
     {
+        animator = GetComponentInChildren<Animator>();
         hitpointsText.text = playerHP.ToString() + " HP";
     }
 
