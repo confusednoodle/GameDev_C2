@@ -14,8 +14,6 @@ public class TopDownPlayerController : MonoBehaviour
     bool isGod = false;
     bool isSprinting = false;
 
-
-    Vector3 startPosition;
     Vector3 newPosition;
 
     private void Awake()
@@ -29,7 +27,10 @@ public class TopDownPlayerController : MonoBehaviour
 
     private void Start()
     {
-        startPosition = gameObject.transform.position;
+        if (SharedState.PlayerEscaped)
+        {
+            transform.position = SharedState.PlayerPosition;
+        }
     }
 
     private void Update()
@@ -43,11 +44,11 @@ public class TopDownPlayerController : MonoBehaviour
         if (Input.GetButtonDown("Debug Previous"))
         {
             isGod = !isGod;
-            col.enabled = !isGod;            
+            col.enabled = !isGod;
         }
 
         isSprinting = Input.GetButton("Fire3");
-      
+
         moveVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
         if (isGod) moveVector *= 5f;
         if (isSprinting) moveVector *= runMultiplier;
@@ -55,7 +56,7 @@ public class TopDownPlayerController : MonoBehaviour
     }
 
     private void SetAnimations()
-    { 
+    {
         // If the player is moving
         if (moveVector != Vector2.zero)
         {
@@ -131,15 +132,15 @@ public class TopDownPlayerController : MonoBehaviour
         }
 
         // triggers for slimes
-        if(col.gameObject.tag == "Slime Cell" & Input.GetButtonDown("Fire1"))
+        if (col.gameObject.tag == "Slime Cell" & Input.GetButtonDown("Fire1"))
         {
-            // insert code to save the player position and place code at the start to load coordinates when switching back to dungeon scene
+            SharedState.PlayerPosition = transform.position;
             SceneManager.LoadScene("Opponent 1");
         }
 
         if (col.gameObject.tag == "Slime Hallway" & Input.GetButtonDown("Fire1"))
         {
-            // insert code to save the player position and place code at the start to load coordinates when switching back to dungeon scene
+            SharedState.PlayerPosition = transform.position;
             SceneManager.LoadScene("Opponent 2");
         }
 

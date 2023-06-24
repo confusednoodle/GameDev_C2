@@ -34,7 +34,7 @@ public class Battle : MonoBehaviour
 
     public void Attack()
     {
-        defend = false; 
+        defend = false;
 
         attackButton.interactable = false;
         healButton.interactable = false;
@@ -138,7 +138,7 @@ public class Battle : MonoBehaviour
     }
 
     void EnemyAttack()
-    { 
+    {
 
         int random = Random.Range(1, 4);
         if (enemyHP < 50 & random == 2 & charged == false) // Heal
@@ -164,7 +164,7 @@ public class Battle : MonoBehaviour
                 charged = false;
 
                 battleText.text = "THE ENEMY MISSES!";
-                
+
                 attackButton.interactable = true;
                 healButton.interactable = true;
                 defendButton.interactable = true;
@@ -178,7 +178,7 @@ public class Battle : MonoBehaviour
                 int damage = Random.Range(5, 11);
                 playerHP -= damage;
                 battleText.text = "THE ENEMY LANDS A LIGHT HIT! YOU LOSE " + damage.ToString() + " HP";
-      
+
                 if (playerHP <= 0)
                 {
                     hitpointsText.text = "0 LP";
@@ -206,7 +206,7 @@ public class Battle : MonoBehaviour
                 int damage = Random.Range(15, 31);
                 playerHP -= damage;
                 battleText.text = "THE ENEMY LANDS A MODERATE HIT! YOU LOSE " + damage.ToString() + " HP";
-                
+
                 if (playerHP <= 0)
                 {
                     hitpointsText.text = "0 LP";
@@ -246,7 +246,7 @@ public class Battle : MonoBehaviour
                 int damage = Random.Range(30, 41);
                 playerHP -= damage;
                 battleText.text = "A CRITICAL HIT! YOU LOSE " + damage.ToString() + " HP";
-                
+
                 if (playerHP <= 0)
                 {
                     hitpointsText.text = "0 LP";
@@ -267,9 +267,9 @@ public class Battle : MonoBehaviour
                 defendButton.interactable = true;
                 runButton.interactable = true;
             }
-        
+
         }
-        
+
 
     }
 
@@ -287,6 +287,7 @@ public class Battle : MonoBehaviour
 
     private IEnumerator WaitForEscape()
     {
+        SharedState.PlayerEscaped = true;
         yield return new WaitForSeconds(1.3f);
         SceneManager.LoadScene("SampleScene");
     }
