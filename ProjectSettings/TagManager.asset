@@ -3,7 +3,23 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Cell Hole
+  - Hallway Stairs Down
+  - Cellar Stairs Up
+  - Hallway Door
+  - Checkerboard Door
+  - Checkerboard Stairs Up
+  - Attic Stairs Down
+  - Treasure Chamber Door
+  - Cellar Door
+  - Slime Cell
+  - Slime Hallway
+  - Slime Checkerboard
+  - Slime Cellar
+  - Slime Left
+  - Slime Right
+  - Slime Attic
   layers:
   - Default
   - TransparentFX
@@ -11,9 +27,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Slimes
+  - Player
+  - Enemy
   - 
   - 
   - 
@@ -49,4 +65,10 @@ TagManager:
     locked: 0
   - name: Objects
     uniqueID: 3858811025
+    locked: 0
+  - name: Player
+    uniqueID: 1192701945
+    locked: 0
+  - name: Enemy
+    uniqueID: 961524753
     locked: 0
