@@ -342,6 +342,7 @@ public class Battle : MonoBehaviour
     {
         animator = GetComponentInChildren<Animator>();
         hitpointsText.text = playerHP.ToString() + " HP";
+        battleText.text = "A WILD " + SharedState.EnemyName + " APPEARED!";
     }
 
 }
