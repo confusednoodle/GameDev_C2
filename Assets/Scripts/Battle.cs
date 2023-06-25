@@ -29,11 +29,24 @@ public class Battle : MonoBehaviour
     [SerializeField] Button healButton;
     [SerializeField] Button defendButton;
     [SerializeField] Button runButton;
+    [SerializeField] AnimationClip[] Animations;
 
+    Animator animator;
 
+    enum AnimationState
+    {
+        Idle,
+        Attack,
+        Hit,
+        Special
+    }
 
     public void Attack()
     {
+        Debug.Log(animator);
+        animator.SetInteger("State", (int)AnimationState.Hit);
+        StartCoroutine(ResetAnimationState(AnimationState.Hit));
+
         defend = false;
 
         attackButton.interactable = false;
@@ -54,6 +67,7 @@ public class Battle : MonoBehaviour
             hitSound.Play();
             int damage = Random.Range(5, 11);
             battleText.text = "YOU LAND A LIGHT HIT! THE ENEMY TAKES " + damage.ToString() + " DAMAGE";
+            animator.Play("hit");
             enemyHP -= damage;
             StartCoroutine(WaitForEnemy());
         }
@@ -63,6 +77,7 @@ public class Battle : MonoBehaviour
             hitSound.Play();
             int damage = Random.Range(20, 31);
             battleText.text = "YOU LAND A MODERATE HIT! THE ENEMY TAKES " + damage.ToString() + " DAMAGE";
+            animator.Play("hit");
             enemyHP -= damage;
             StartCoroutine(WaitForEnemy());
         }
@@ -72,6 +87,7 @@ public class Battle : MonoBehaviour
             hitSound.Play();
             int damage = Random.Range(40, 51);
             battleText.text = "A CRITICAL HIT! THE ENEMY TAKES " + damage.ToString() + " DAMAGE";
+            animator.Play("hit");
             enemyHP -= damage;
             StartCoroutine(WaitForEnemy());
         }
@@ -139,7 +155,6 @@ public class Battle : MonoBehaviour
 
     void EnemyAttack()
     {
-
         int random = Random.Range(1, 4);
         if (enemyHP < 50 & random == 2 & charged == false) // Heal
         {
@@ -173,6 +188,8 @@ public class Battle : MonoBehaviour
 
             else if (number > 10 & number < 41 & charged == false) //light attack
             {
+                animator.SetInteger("State", (int)AnimationState.Attack);
+                StartCoroutine(ResetAnimationState(AnimationState.Attack));
                 Debug.Log("light attack");
                 hitSound.Play();
                 int damage = Random.Range(5, 11);
@@ -201,6 +218,8 @@ public class Battle : MonoBehaviour
 
             else if (number > 40 & number < 81 & charged == false) //moderate attack
             {
+                animator.SetInteger("State", (int)AnimationState.Attack);
+                StartCoroutine(ResetAnimationState(AnimationState.Attack));
                 Debug.Log("moderate attack");
                 hitSound.Play();
                 int damage = Random.Range(15, 31);
@@ -241,6 +260,8 @@ public class Battle : MonoBehaviour
 
             else if (charged = true & number < 80) //critical attack
             {
+                animator.SetInteger("State", (int)AnimationState.Special);
+                StartCoroutine(ResetAnimationState(AnimationState.Special));
                 Debug.Log("critical attack");
                 specialSound.Play();
                 int damage = Random.Range(30, 41);
@@ -311,8 +332,15 @@ public class Battle : MonoBehaviour
         transform.GetChild(1).gameObject.SetActive(true);
     }
 
+    private IEnumerator ResetAnimationState(AnimationState state)
+    {
+        yield return new WaitForSeconds(Animations[(int)state].length);
+        animator.SetInteger("State", (int)AnimationState.Idle);
+    }
+
     public void Start()
     {
+        animator = GetComponentInChildren<Animator>();
         hitpointsText.text = playerHP.ToString() + " HP";
     }
 
