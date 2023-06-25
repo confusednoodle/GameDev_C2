@@ -262,7 +262,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.40170375}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -688.96906, y: -310.99994}
+  m_AnchoredPosition: {x: -688.96906, y: -310.9999}
   m_SizeDelta: {x: 404.0574, y: 75.214}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &155244380
@@ -7054,7 +7054,11 @@ MonoBehaviour:
   healButton: {fileID: 825493001}
   defendButton: {fileID: 292457931}
   runButton: {fileID: 1786839817}
-  Animations: []
+  Animations:
+  - {fileID: 7400000, guid: 3876eeba42fb699449806be2e0a3fc52, type: 2}
+  - {fileID: 7400000, guid: 9b7891b5f8943484aae5d022e53c0e1e, type: 2}
+  - {fileID: 7400000, guid: 96136b43dd33b094e98b2ad745d1b5e9, type: 2}
+  - {fileID: 7400000, guid: 98965b1bdc9783641a334e1391661122, type: 2}
 --- !u!82 &1794538802
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7897,7 +7901,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.40170375}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -688.97, y: -310.99997}
+  m_AnchoredPosition: {x: -688.97, y: -310.99994}
   m_SizeDelta: {x: 404.06, y: 75.213}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1933209496
