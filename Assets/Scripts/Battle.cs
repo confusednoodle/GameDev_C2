@@ -29,6 +29,7 @@ public class Battle : MonoBehaviour
     [SerializeField] Button healButton;
     [SerializeField] Button defendButton;
     [SerializeField] Button runButton;
+    [SerializeField] AnimationClip[] Animations;
 
     Animator animator;
 
@@ -44,7 +45,7 @@ public class Battle : MonoBehaviour
     {
         Debug.Log(animator);
         animator.SetInteger("State", (int)AnimationState.Hit);
-        StartCoroutine(ResetAnimationState());
+        StartCoroutine(ResetAnimationState(AnimationState.Hit));
 
         defend = false;
 
@@ -188,7 +189,7 @@ public class Battle : MonoBehaviour
             else if (number > 10 & number < 41 & charged == false) //light attack
             {
                 animator.SetInteger("State", (int)AnimationState.Attack);
-                StartCoroutine(ResetAnimationState());
+                StartCoroutine(ResetAnimationState(AnimationState.Attack));
                 Debug.Log("light attack");
                 hitSound.Play();
                 int damage = Random.Range(5, 11);
@@ -218,7 +219,7 @@ public class Battle : MonoBehaviour
             else if (number > 40 & number < 81 & charged == false) //moderate attack
             {
                 animator.SetInteger("State", (int)AnimationState.Attack);
-                StartCoroutine(ResetAnimationState());
+                StartCoroutine(ResetAnimationState(AnimationState.Attack));
                 Debug.Log("moderate attack");
                 hitSound.Play();
                 int damage = Random.Range(15, 31);
@@ -260,7 +261,7 @@ public class Battle : MonoBehaviour
             else if (charged = true & number < 80) //critical attack
             {
                 animator.SetInteger("State", (int)AnimationState.Special);
-                StartCoroutine(ResetAnimationState());
+                StartCoroutine(ResetAnimationState(AnimationState.Special));
                 Debug.Log("critical attack");
                 specialSound.Play();
                 int damage = Random.Range(30, 41);
@@ -331,9 +332,9 @@ public class Battle : MonoBehaviour
         transform.GetChild(1).gameObject.SetActive(true);
     }
 
-    private IEnumerator ResetAnimationState()
+    private IEnumerator ResetAnimationState(AnimationState state)
     {
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(Animations[(int)state].length);
         animator.SetInteger("State", (int)AnimationState.Idle);
     }
 
