@@ -17,12 +17,10 @@ public class Battle : MonoBehaviour
     [SerializeField] TMP_Text hitpointsText;
     [SerializeField] Image healthBar;
 
-    [SerializeField] AudioSource hitSound;
     [SerializeField] AudioSource healSound;
     [SerializeField] AudioSource victorySound;
     [SerializeField] AudioSource deathSound;
     [SerializeField] AudioSource chargeSound;
-    [SerializeField] AudioSource specialSound;
     [SerializeField] AudioSource escapeSound;
 
     [SerializeField] Button attackButton;
@@ -57,14 +55,12 @@ public class Battle : MonoBehaviour
         int number = Random.Range(1, 101);
         if (number < 11) //missing attack
         {
-            hitSound.Play();
             battleText.text = "YOU MISS! THE ENEMY TAKES 0 DAMAGE";
             StartCoroutine(WaitForEnemy());
         }
 
         else if (number > 10 & number < 41) //light attack
         {
-            hitSound.Play();
             int damage = Random.Range(5, 11);
             battleText.text = "YOU LAND A LIGHT HIT! THE ENEMY TAKES " + damage.ToString() + " DAMAGE";
             animator.Play("hit");
@@ -74,7 +70,6 @@ public class Battle : MonoBehaviour
 
         else if (number > 40 & number < 91) //moderate attack
         {
-            hitSound.Play();
             int damage = Random.Range(20, 31);
             battleText.text = "YOU LAND A MODERATE HIT! THE ENEMY TAKES " + damage.ToString() + " DAMAGE";
             animator.Play("hit");
@@ -84,7 +79,6 @@ public class Battle : MonoBehaviour
 
         else if (number > 90 & number < 101) //critical attack
         {
-            hitSound.Play();
             int damage = Random.Range(40, 51);
             battleText.text = "A CRITICAL HIT! THE ENEMY TAKES " + damage.ToString() + " DAMAGE";
             animator.Play("hit");
@@ -175,7 +169,6 @@ public class Battle : MonoBehaviour
             if ((number < 11 & charged == false) || defend) //missing attack
             {
                 Debug.Log("missing attack");
-                hitSound.Play();
                 charged = false;
 
                 battleText.text = "THE ENEMY MISSES!";
@@ -191,7 +184,6 @@ public class Battle : MonoBehaviour
                 animator.SetInteger("State", (int)AnimationState.Attack);
                 StartCoroutine(ResetAnimationState(AnimationState.Attack));
                 Debug.Log("light attack");
-                hitSound.Play();
                 int damage = Random.Range(5, 11);
                 playerHP -= damage;
                 battleText.text = "THE ENEMY LANDS A LIGHT HIT! YOU LOSE " + damage.ToString() + " HP";
@@ -221,7 +213,6 @@ public class Battle : MonoBehaviour
                 animator.SetInteger("State", (int)AnimationState.Attack);
                 StartCoroutine(ResetAnimationState(AnimationState.Attack));
                 Debug.Log("moderate attack");
-                hitSound.Play();
                 int damage = Random.Range(15, 31);
                 playerHP -= damage;
                 battleText.text = "THE ENEMY LANDS A MODERATE HIT! YOU LOSE " + damage.ToString() + " HP";
@@ -263,7 +254,6 @@ public class Battle : MonoBehaviour
                 animator.SetInteger("State", (int)AnimationState.Special);
                 StartCoroutine(ResetAnimationState(AnimationState.Special));
                 Debug.Log("critical attack");
-                specialSound.Play();
                 int damage = Random.Range(30, 41);
                 playerHP -= damage;
                 battleText.text = "A CRITICAL HIT! YOU LOSE " + damage.ToString() + " HP";
