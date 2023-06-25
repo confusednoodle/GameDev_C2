@@ -6566,7 +6566,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.40170375}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -688.97, y: -310.99994}
+  m_AnchoredPosition: {x: -688.97, y: -310.9999}
   m_SizeDelta: {x: 404.06, y: 75.213}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1163374379
@@ -11791,7 +11791,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.40170375}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -688.96906, y: -310.9999}
+  m_AnchoredPosition: {x: -688.96906, y: -310.99988}
   m_SizeDelta: {x: 404.0574, y: 75.214}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1843800270
@@ -12762,6 +12762,11 @@ MonoBehaviour:
   healButton: {fileID: 2036897920}
   defendButton: {fileID: 27690814}
   runButton: {fileID: 1446451274}
+  Animations:
+  - {fileID: 7400000, guid: 866b956bbe8795a25b5ef03ffd294dcc, type: 2}
+  - {fileID: 7400000, guid: fdbc6557aa9ac6b66baaeaa11bfe4658, type: 2}
+  - {fileID: 7400000, guid: 5162507eb90421e2ab59e57e152eb80e, type: 2}
+  - {fileID: 7400000, guid: 52099979a9ad413168d347e1c7a4b6e2, type: 2}
 --- !u!114 &1914477575
 MonoBehaviour:
   m_ObjectHideFlags: 0
