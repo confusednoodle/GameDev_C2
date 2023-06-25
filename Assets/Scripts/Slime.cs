@@ -33,6 +33,21 @@ public class Slime : MonoBehaviour
 
     public void LoadScene()
     {
+        switch (SceneToLoad.Replace("Opponent ", ""))
+        {
+            case "1":
+                SharedState.EnemyName = "BAT";
+                break;
+            case "2":
+                SharedState.EnemyName = "GHOST";
+                break;
+            case "3":
+                SharedState.EnemyName = "SKELETON";
+                break;
+            default:
+                SharedState.EnemyName = "404 ENEMY NAME NOT FOUND. THIS IS A BUG :((((((";
+                break;
+        }
         SceneManager.LoadScene(SceneToLoad);
     }
 }
