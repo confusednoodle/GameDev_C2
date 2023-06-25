@@ -262,7 +262,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.40170375}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -688.96906, y: -310.99997}
+  m_AnchoredPosition: {x: -688.96906, y: -310.99994}
   m_SizeDelta: {x: 404.0574, y: 75.214}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &155244380
@@ -6990,8 +6990,8 @@ Canvas:
   m_GameObject: {fileID: 1794538796}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 2025808811}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -7054,6 +7054,7 @@ MonoBehaviour:
   healButton: {fileID: 825493001}
   defendButton: {fileID: 292457931}
   runButton: {fileID: 1786839817}
+  Animations: []
 --- !u!82 &1794538802
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7896,7 +7897,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.40170375}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -688.97, y: -311}
+  m_AnchoredPosition: {x: -688.97, y: -310.99997}
   m_SizeDelta: {x: 404.06, y: 75.213}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1933209496
